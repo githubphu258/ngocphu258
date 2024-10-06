@@ -1,0 +1,598 @@
+<html>
+<head>
+  <title>Anime Alya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+  body {
+    background-image: url('alya.jpg'); /* Thay thế bằng đường dẫn đến hình ảnh của bạn */
+    background-size: cover; /* Đảm bảo hình ảnh phủ kín toàn bộ phần nền */
+    background-repeat: no-repeat; /* Ngăn không cho hình ảnh lặp lại */
+    background-position: center; /* Căn giữa hình ảnh trong phần nền */
+    
+    /* Thiết lập màu nền với độ trong suốt */
+    background-color: rgba(7, 213, 240, 0.5); /* Màu xanh với 50% độ trong suốt */
+}
+
+
+
+    .menu {
+      background-color: rgba(0, 0, 0, 0.651);
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Chuyển thành menu dọc */
+      align-items: center; /* Căn giữa các phần tử */
+      position: absolute; /* Đặt vị trí tuyệt đối để menu nằm ở góc */
+      top: 0; /* Vị trí từ trên xuống */
+      left: -350px; /* Vị trí từ bên phải sang */
+      margin: 1rem; /* Khoảng cách bên ngoài */
+    }
+    .lang-button,
+    .auth-button {
+      transition: transform 0.2s;
+      margin: 0.5rem 0; /* Thêm khoảng cách giữa các nút */
+    }
+    .lang-button:hover,
+    .auth-button:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+    .active {
+      box-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+    }
+    .auth-active {
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+    }
+    /* Icons effects */
+    .social-icon {
+      transition: background-color 0.3s, box-shadow 0.3s;
+      border-radius: 50%;
+      padding: 10px;
+      margin: 0.5rem; /* Thêm khoảng cách giữa các biểu tượng xã hội */
+    }
+    .social-icon:hover {
+      cursor: pointer;
+    }
+    .facebook:hover {
+      background-color: rgba(6, 68, 238, 0.5);
+    }
+    .tiktok:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .youtube:hover {
+      background-color: rgba(255, 0, 0, 0.7);
+    }
+  </style>
+
+  <script>
+  let currentLang = 'vn';
+
+function toggleLanguage(lang) {
+  const loginButton = document.getElementById('login-button');
+  const signupButton = document.getElementById('signup-button');
+  const vnButton = document.getElementById('vn-button');
+  const enButton = document.getElementById('en-button');
+
+  if (lang === 'en') {
+    currentLang = 'en';
+    loginButton.textContent = 'Login';
+    signupButton.textContent = 'Sign Up';
+    vnButton.classList.remove('active');
+    enButton.classList.add('active');
+  } else {
+    currentLang = 'vn';
+    loginButton.textContent = 'Đăng nhập';
+    signupButton.textContent = 'Đăng ký';
+    enButton.classList.remove('active');
+    vnButton.classList.add('active');
+  }
+}
+
+function toggleAuth(action) {
+  const loginButton = document.getElementById('login-button');
+  const signupButton = document.getElementById('signup-button');
+
+  if (action === 'login') {
+    loginButton.classList.add('auth-active');
+    signupButton.classList.remove('auth-active');
+  } else if (action === 'signup') {
+    signupButton.classList.add('auth-active');
+    loginButton.classList.remove('auth-active');
+  }
+}
+
+   
+function toggleAuth(action) {
+  // Đóng tất cả các form trước khi mở form tương ứng
+  closeAuthForm();
+  
+  if (action === 'login') {
+    document.getElementById('login-form').classList.remove('hidden');
+  } else if (action === 'register') {
+    document.getElementById('signup-form').classList.remove('hidden');
+  }
+}
+
+function closeAuthForm() {
+  document.getElementById('login-form').classList.add('hidden');
+  document.getElementById('signup-form').classList.add('hidden');
+}
+
+function handleLogin() {
+  // Xử lý đăng nhập (ví dụ: gọi API)
+  alert('Đăng nhập thành công');
+}
+
+function handleSignup() {
+  // Xử lý đăng ký (ví dụ: gọi API)
+  alert('Đăng ký thành công');
+}
+
+function handleSignup() {
+  // Xử lý đăng ký (ví dụ: gọi API)
+  alert('Đăng ký thành công');
+  
+  // Ẩn form đăng ký sau khi đăng ký thành công
+  closeAuthForm();
+}
+
+
+// Đăng ký người dùng và lưu thông tin vào local storage
+function handleSignup() {
+  const username = document.querySelector('#signup-form input[placeholder="Tên đăng nhập"]').value;
+  const password = document.querySelector('#signup-form input[placeholder="Mật khẩu"]').value;
+  const rePassword = document.querySelector('#signup-form input[placeholder="Nhập lại mật khẩu"]').value;
+
+  if (username === "" || password === "" || rePassword === "") {
+    alert("Vui lòng điền đầy đủ thông tin");
+    return;
+  }
+
+  if (password !== rePassword) {
+    alert("Mật khẩu nhập lại không khớp");
+    return;
+  }
+
+  // Lưu thông tin người dùng vào local storage
+  localStorage.setItem("username", username);
+  localStorage.setItem("password", password);
+
+  alert("Đăng ký thành công");
+
+  // Ẩn form đăng ký sau khi đăng ký thành công
+  closeAuthForm();
+}
+
+// Xử lý đăng nhập và kiểm tra thông tin người dùng
+function handleLogin() {
+  const username = document.querySelector('#login-form input[placeholder="Tên đăng nhập"]').value;
+  const password = document.querySelector('#login-form input[placeholder="Mật khẩu"]').value;
+
+  const registeredUsername = localStorage.getItem("username");
+  const registeredPassword = localStorage.getItem("password");
+
+  if (username === registeredUsername && password === registeredPassword) {
+    alert("Đăng nhập thành công");
+    // Ẩn form đăng nhập sau khi đăng nhập thành công
+    closeAuthForm();
+  } else {
+    alert("Tên đăng nhập hoặc mật khẩu không đúng");
+  }
+}
+
+document.addEventListener('keydown', function(event) {
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+
+  // Kiểm tra xem form đăng nhập hoặc đăng ký có đang mở không
+  if (event.key === "Enter") {
+    if (!loginForm.classList.contains('hidden')) {
+      // Nếu form đăng nhập đang mở, gọi hàm handleLogin
+      handleLogin();
+    } else if (!signupForm.classList.contains('hidden')) {
+      // Nếu form đăng ký đang mở, gọi hàm handleSignup
+      handleSignup();
+    }
+  }
+});
+// Đăng ký người dùng và lưu thông tin vào local storage
+function handleSignup() {
+  const usernameInput = document.querySelector('#signup-form input[placeholder="Tên đăng nhập"]');
+  const passwordInput = document.querySelector('#signup-form input[placeholder="Mật khẩu"]');
+  const rePasswordInput = document.querySelector('#signup-form input[placeholder="Nhập lại mật khẩu"]');
+
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+  const rePassword = rePasswordInput.value;
+
+  if (username === "" || password === "" || rePassword === "") {
+    alert("Vui lòng điền đầy đủ thông tin");
+    return;
+  }
+
+  if (password !== rePassword) {
+    alert("Mật khẩu nhập lại không khớp");
+    return;
+  }
+
+  // Lưu thông tin người dùng vào local storage
+  localStorage.setItem("username", username);
+  localStorage.setItem("password", password);
+
+  alert("Đăng ký thành công");
+
+  // Reset lại ô nhập
+  usernameInput.value = "";
+  passwordInput.value = "";
+  rePasswordInput.value = "";
+
+  // Ẩn form đăng ký sau khi đăng ký thành công
+  closeAuthForm();
+}
+
+// Xử lý đăng nhập và kiểm tra thông tin người dùng
+function handleLogin() {
+  const usernameInput = document.querySelector('#login-form input[placeholder="Tên đăng nhập"]');
+  const passwordInput = document.querySelector('#login-form input[placeholder="Mật khẩu"]');
+
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+
+  const registeredUsername = localStorage.getItem("username");
+  const registeredPassword = localStorage.getItem("password");
+
+  if (username === registeredUsername && password === registeredPassword) {
+    alert("Đăng nhập thành công");
+    // Ẩn form đăng nhập sau khi đăng nhập thành công
+    closeAuthForm();
+  } else {
+    alert("Tên đăng nhập hoặc mật khẩu không đúng");
+  }
+
+  // Reset lại ô nhập
+  usernameInput.value = "";
+  passwordInput.value = "";
+}
+
+
+  </script>
+</head>
+<body class="bg-white">
+  <div class="container mx-auto p-4 relative">
+    <div class="absolute top-0 left-0 m-4 flex items-center">
+      <i class="fas fa-pencil-alt text-gray-500 mr-2"></i>
+      
+      <span class="text-black font-semibold shadow-lg move-left">
+        Website designed by Ngọc Phú
+    </span>
+
+    
+    </div>
+    
+    
+    <!-- Right Menu -->
+    <div class="menu">
+      <button id="login-button" class="auth-button bg-green-500 text-white px-4 py-2 rounded-full" onclick="toggleAuth('login')">
+        Đăng nhập
+      </button>
+      <button id="signup-button" class="auth-button bg-orange-500 text-white px-4 py-2 rounded-full" onclick="toggleAuth('register')">
+        Đăng ký
+      </button>
+      <div id="vn-button" class="lang-button bg-gray-200 px-4 py-2 rounded-full cursor-pointer active" onclick="toggleLanguage('vn')">
+        VN
+      </div>
+      <div id="en-button" class="lang-button bg-gray-200 px-4 py-2 rounded-full cursor-pointer" onclick="toggleLanguage('en')">
+        EN
+      </div>
+      <a href="https://facebook.com" target="_blank" class="social-icon facebook">
+        <i class="fab fa-facebook fa-2x text-white"></i>
+      </a>
+      <a href="https://tiktok.com" target="_blank" class="social-icon tiktok">
+        <i class="fab fa-tiktok fa-2x text-white"></i>
+      </a>
+      <a href="https://youtube.com" target="_blank" class="social-icon youtube">
+        <i class="fab fa-youtube fa-2x text-white"></i>
+      </a>
+    </div>
+
+
+ <!-- Login Form -->
+<div id="login-form" class="auth-form hidden">
+  <div class="form-container">
+    <h2 class="form-title">Đăng nhập</h2>
+    <input type="text" placeholder="Tên đăng nhập" class="input-field" />
+    <input type="password" placeholder="Mật khẩu" class="input-field" />
+    <button class="submit-button bg-green-500 text-white px-4 py-2 rounded-full" onclick="handleLogin()">Đăng nhập</button>
+    <button class="close-button" onclick="closeAuthForm()">Đóng</button>
+  </div>
+</div>
+
+<!-- Signup Form -->
+<div id="signup-form" class="auth-form hidden">
+  <div class="form-container">
+    <h2 class="form-title">Đăng ký</h2>
+    <input type="text" placeholder="Tên đăng nhập" class="input-field" />
+    <input type="password" placeholder="Mật khẩu" class="input-field" />
+    <input type="password" placeholder="Nhập lại mật khẩu" class="input-field" />
+    <button class="submit-button bg-orange-500 text-white px-4 py-2 rounded-full" onclick="handleSignup()">Đăng ký</button>
+    <button class="close-button" onclick="closeAuthForm()">Đóng</button>
+  </div>
+</div>
+
+
+
+    <div class="text-center mt-12">
+      <div class="inline-block bg-pink-200 px-8 py-4 rounded-full text-pink-700 font-bold mb-6">
+        <span class="text-lg">
+          時々ボソッと (Tokidoki Bosotto)
+        </span>
+      </div>
+      <h1 class="text-6xl font-bold mb-4 leading-tight">
+        <span class="text-black">
+          ロシア語で
+        </span>
+        <span class="text-red-500">
+          デレる
+        </span>
+        <span class="text-black">
+          隣の
+        </span>
+        <span class="text-blue-500">
+          アーリャさん
+        </span>
+      </h1>
+      <!-- <div class="inline-block bg-pink-300 px-10 py-4 rounded-full text-white font-bold mb-12 text-2xl">
+        Season 2 Confirmed!! Get Ready for More Adventures!
+      </div> -->
+    </div>
+    <!-- <div class="flex justify-center mb-8">
+      <img alt="Group of anime characters in a classroom" class="rounded-lg shadow-lg" height="600" src="anhbiachinh.jpg" width="800"/>
+    </div> -->
+
+    <span class="spacer"></span>
+
+    
+
+
+    <div class="text-center">
+      <div class="relative inline-block">
+        <video class="rounded-lg shadow-lg" width="600" height="500" controls loop >
+          <source src="alyaaedit2.mp4" type="video/mp4">
+          
+        </video>
+      </div>
+      
+
+    <div class="mt-8 text-black text-4xl font-bold shadow-lg glowing-text">
+    "This video was edited by Ngọc Phú"
+</div>
+    
+
+    </div>
+  </div>
+
+
+  <head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgb(6, 48, 233);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .news-section {
+            text-align: right;
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            color: #333;
+            text-align: right;
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-size: 16px;
+            color: #666;
+            text-align: right;
+        }
+
+        .news h2 {
+            font-size: 28px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .news ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .news li {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 10px;
+        }
+
+        .news .date {
+            font-weight: bold;
+            color: #888;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .social-section {
+            margin-top: 40px;
+            text-align: right;
+        }
+
+        .twitter-widget {
+            display: inline-block;
+            width: 300px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.7); /* Black translucent background */
+            color: #fff; /* White text */
+        }
+
+        .twitter-widget a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .twitter-widget a:hover {
+            color: #1da1f2; /* Twitter blue on hover */
+        }
+
+        .tweet p {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .tweet strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section class="news-section">
+          <h1 style="font-weight: bold; color: black;">Information</h1>
+          <p class="subtitle" style="font-weight: bold; color: black;">Иногда Аля внезапно кокетничает по-русски</p>
+          
+          <div class="news">
+              <h2 style="color: blue; font-weight: bold;">News</h2>
+              <ul>
+                  <li>
+                      <span class="date" style="color: blue; font-weight: bold;">2024.07.24</span>
+                      <p style="font-weight: bold; color: black;">Thank you YouTube 100,000 followers!!</p>
+                  </li>
+                  <li>
+                      <span class="date" style="color: blue; font-weight: bold;">2024.06.26</span>
+                      <p style="font-weight: bold; color: black;">Second main PV released!</p>
+                  </li>
+                  <li>
+                      <span class="date" style="color: blue; font-weight: bold;">2024.06.26</span>
+                      <p style="font-weight: bold; color: black;">First release of collaboration music with Kafu and ZOOKARADERU "Himitsu no Kotoba (Secret Words)" Alya (V.A. Sumire Uesaka) ver. Comments have arrived!</p>
+                  </li>
+                  <li>
+                      <span class="date" style="color: blue; font-weight: bold;">2024.06.25</span>
+                      <p style="font-weight: bold; color: black;">Celebrating the 50,000th subscriber to the Roshidere YouTube channel!</p>
+                  </li>
+                  <li>
+                      <span class="date" style="color: blue; font-weight: bold;">2024.06.07</span>
+                      <p style="font-weight: bold; color: black;">Panel and Screening in Anime Expo 2024</p>
+                  </li>
+              </ul>
+          </div>
+          
+        </section>
+
+        <section class="social-section">
+            <div class="twitter-widget">
+                <a href="https://twitter.com/roshidere" target="_blank">
+                    <div class="tweet">
+                        <p>『時々ボソッとロシア語でデレる隣のアーリャさん』</p>
+                        <p>TVアニメ『時々ボソッとロシア語でデレる隣のアーリャさん』<br>
+                            ✨🎀Season 2 制作決定🎀✨</p>
+                        <p><strong>「よろこんで」</strong></p>
+                        <p>政近とアーリャたちの物語は<br>まだまだ続きます。続報をお楽しみに✨</p>
+                        <a href="https://www.youtube.com/@KADOKAWAanime" target="_blank">YouTube link</a>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+</body>
+
+
+<!-- nút top -->
+<style>
+  /* Applying a more elegant font from Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif; /* Changing the font to Poppins for a softer, modern look */
+  }
+
+  /* Styling for the Top button with softer edges and a smooth shadow effect */
+  #top-button {
+    background-color: rgba(0, 123, 255, 0.9); /* Soft blue color with opacity */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px; /* Rounded corners for a smooth button */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease; /* Smooth transitions for appearance and scale */
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for a floating effect */
+    font-size: 1.1rem;
+    font-weight: 500; /* Adding slight weight for better readability */
+  }
+
+  #top-button:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover */
+  }
+
+  #top-button.show {
+    display: block;
+    opacity: 1;
+  }
+
+  #top-button.hide {
+    opacity: 0;
+  }
+</style>
+</head>
+
+<body class="bg-white">
+<div class="container mx-auto p-4 relative">
+  <!-- Your content here -->
+
+  <!-- "Top" button -->
+  <button id="top-button" class="bg-blue-500 text-white px-4 py-2 rounded-full fixed bottom-4 right-4 hidden">
+    ⬆ Page Top
+  </button>
+
+  <script>
+    const topButton = document.getElementById("top-button");
+
+    // Show the button when scrolling down
+    window.onscroll = function () {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        topButton.classList.add('show');
+        topButton.classList.remove('hide');
+      } else {
+        topButton.classList.add('hide');
+        topButton.classList.remove('show');
+      }
+    };
+
+    // Smooth scroll to top when the button is clicked
+    topButton.onclick = function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    };
+  </script>
+</div>
+
+</body>
+</html>
+ 

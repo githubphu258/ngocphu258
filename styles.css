@@ -1,0 +1,136 @@
+.auth-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(85, 74, 74, 0.801);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    z-index: 1000;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-field {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .close-button {
+    margin-top: 10px;
+    background: red;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .form-title {
+    font-size: 20px;
+    font-weight: bold; /* In đậm */
+    color: #e5ff00; /* Màu xanh dương */
+    text-align: center; /* Canh giữa */
+    text-shadow: 0 0 8px #00f; /* Phát sáng màu xanh dương */
+  }
+  
+
+  .shadow-lg {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Điều chỉnh kích thước và màu sắc bóng */
+}
+.move-left {
+    display: inline-block; /* Cho phép sử dụng margin */
+    margin-left: 435px; /* Điều chỉnh giá trị âm để xích qua trái */
+}
+
+
+
+  .modal {
+    display: flex; /* Flexbox để canh giữa modal */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); /* Màu nền tối */
+    background-color: rgba(0,0,0,0.4); /* Màu nền tối với độ trong suốt */
+    justify-content: center; /* Canh giữa theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Canh giữa */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Chiều rộng của modal */
+    text-align: center; /* Canh giữa nội dung bên trong modal */
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+
+
+  .spacer {
+    display: block; /* Chuyển đổi span thành phần tử khối */
+    padding-top: 65em; /* Tạo khoảng cách tương đương với 5 dòng (1 dòng ~ 1em) */
+}
+
+
+.glowing-text {
+    position: relative;
+    display: inline-block;
+    padding: 10px; /* Thêm khoảng cách cho viền */
+}
+
+.glowing-text::before {
+    content: '';
+    position: absolute;
+    top: -5px; /* Điều chỉnh vị trí viền */
+    left: -5px; /* Điều chỉnh vị trí viền */
+    right: -5px; /* Điều chỉnh vị trí viền */
+    bottom: -5px; /* Điều chỉnh vị trí viền */
+    background: rgba(0, 255, 255, 0.5); /* Màu xanh nước biển với độ trong suốt */
+    border-radius: 5px; /* Bo góc viền nếu cần */
+    animation: glowing 1.7s infinite; /* Hiệu ứng nháy */
+    z-index: -1; /* Đặt dưới chữ */
+}
+
+@keyframes glowing {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+
+
